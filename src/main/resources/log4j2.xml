@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration  xmlns="http://logging.apache.org/log4j/2.0/config">
+
+	<Properties>
+		<Property name="fileName">spittle.log</Property>
+	</Properties>
+
+	<Appenders>
+
+        <File name="file" fileName="${fileName}" append="false">
+            <PatternLayout pattern="%t %-5p %c{2} - %m%n"/>
+        </File>
+
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%t %-5p %c{2} - %m%n">
+			</PatternLayout>
+		</Console>
+
+	</Appenders>
+
+
+	<Loggers>
+		<!-- Application Loggers -->
+		<Logger name="spittr" level="debug">
+			<AppenderRef ref="file"></AppenderRef>
+		</Logger>
+
+		<!-- 3rdparty Loggers -->
+		<Logger name="org.springframework.core" level="debug">
+			<AppenderRef ref="file"></AppenderRef>
+		</Logger>
+
+		<Logger name="org.springframework.beans" level="debug">
+			<AppenderRef ref="file"></AppenderRef>
+		</Logger>
+
+		<Logger name="org.springframework.context" level="debug">
+			<AppenderRef ref="file"></AppenderRef>
+		</Logger>
+
+		<Logger name="org.springframework.web" level="debug">
+			<AppenderRef ref="file"></AppenderRef>
+		</Logger>
+		<Logger name="org.apache.logging.log4j.web" level="debug">
+			<AppenderRef ref="file"></AppenderRef>
+		</Logger>
+
+		<!-- Root Logger -->
+		<Root level="warn">
+			<AppenderRef ref="file" />
+		</Root>
+	</Loggers>
+	
+
+	
+</Configuration>
