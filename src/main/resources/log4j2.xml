@@ -7,7 +7,7 @@
 
 	<Appenders>
 
-        <File name="file" fileName="${fileName}" append="false">
+        <File name="file" fileName="${sys:user.home}/logs/${fileName}" append="false">
             <PatternLayout pattern="%t %-5p %c{2} - %m%n"/>
         </File>
 

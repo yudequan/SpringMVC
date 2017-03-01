@@ -1,78 +1,58 @@
 package spittr;
 
+import java.util.Date;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import java.util.Date;
+public class Spittle {
 
-/**
- * Created by yudequan on 23/02/2017.
- */
-public class Spittle
-{
-    private final Long id;
+  private final Long id;
+  private final String message;
+  private final Date time;
+  private Double latitude;
+  private Double longitude;
 
-    private final String message;
+  public Spittle(String message, Date time) {
+    this(null, message, time, null, null);
+  }
+  
+  public Spittle(Long id, String message, Date time, Double longitude, Double latitude) {
+    this.id = id;
+    this.message = message;
+    this.time = time;
+    this.longitude = longitude;
+    this.latitude = latitude;
+  }
 
-    private final Date time;
+  public long getId() {
+    return id;
+  }
 
-    private Double latitude;
+  public String getMessage() {
+    return message;
+  }
 
-    private Double longitude;
-
-    public Spittle(String message, Date time)
-    {
-        this(null, message, time);
-    }
-
-    public Spittle(Long id, String message, Date time)
-    {
-        this(id, message, time, null, null);
-    }
-
-    public Spittle(long id, String message, Date time, Double latitude, Double longitude)
-    {
-        this.id = id;
-        this.message = message;
-        this.time = time;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public String getMessage()
-    {
-        return message;
-    }
-
-    public Date getTime()
-    {
-        return time;
-    }
-
-    public Double getLatitude()
-    {
-        return latitude;
-    }
-
-    public Double getLongitude()
-    {
-        return longitude;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return HashCodeBuilder.reflectionHashCode(this, "id", "time");
-    }
-
-    @Override
-    public boolean equals(Object obj)
-    {
-        return EqualsBuilder.reflectionEquals(this, obj, "id", "time");
-    }
+  public Date getTime() {
+    return time;
+  }
+  
+  public Double getLongitude() {
+    return longitude;
+  }
+  
+  public Double getLatitude() {
+    return latitude;
+  }
+  
+  @Override
+  public boolean equals(Object that) {
+    return EqualsBuilder.reflectionEquals(this, that, "id", "time");
+  }
+  
+  @Override
+  public int hashCode() {
+    return HashCodeBuilder.reflectionHashCode(this, "id", "time");
+  }
+  
 }

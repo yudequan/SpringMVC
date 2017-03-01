@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.java</groupId>
-    <artifactId>SpringMVC</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>Spittr</artifactId>
+    <version>1.0</version>
     <packaging>war</packaging>
 
     <parent>
@@ -14,6 +14,9 @@
         <artifactId>Maven-Dependencies</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <build>
+    	<finalName>Spittr</finalName>
+    </build>
     <dependencies>
 
         <dependency>
@@ -89,6 +92,10 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
+        </dependency>
+        <dependency>
+        	    <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
         </dependency>
     </dependencies>
 </project>
