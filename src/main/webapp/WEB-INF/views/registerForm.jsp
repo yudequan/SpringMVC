@@ -10,7 +10,7 @@
   <body>
     <h1>Register</h1>
 
-    <sf:form method="POST" commandName="spitter" >
+    <sf:form method="POST" commandName="spitter" enctype="multipart/form-data">
       <sf:errors path="*" element="div" cssClass="errors" />
       <sf:label path="firstName" 
           cssErrorClass="error">First Name</sf:label>: 
@@ -27,6 +27,8 @@
       <sf:label path="password" 
           cssErrorClass="error">Password</sf:label>: 
         <sf:password path="password" cssErrorClass="error" /><br/>
+      <sf:label path="profilePicture">Profile Picture</sf:label>:
+      	<sf:input path="profilePicture" type="file" accept="image/jpeg, image/png, image/gif"></sf:input><br/>
       <input type="submit" value="Register" />
     </sf:form>
   </body>

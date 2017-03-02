@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Spitter {
 
@@ -30,6 +31,8 @@ public class Spitter {
   @NotNull
   @Email
   private String email;
+  
+  private MultipartFile profilePicture;
 
   public Spitter() {}
   
@@ -93,8 +96,18 @@ public class Spitter {
   public void setEmail(String email) {
     this.email = email;
   }
+  
+  public MultipartFile getProfilePicture()
+{
+	return profilePicture;
+}
 
-  @Override
+public void setProfilePicture(MultipartFile profilePicture)
+{
+	this.profilePicture = profilePicture;
+}
+
+@Override
   public boolean equals(Object that) {
     return EqualsBuilder.reflectionEquals(this, that, "firstName", "lastName", "username", "password", "email");
   }
