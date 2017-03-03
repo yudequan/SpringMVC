@@ -8,7 +8,7 @@
     <artifactId>Spittr</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-
+	
     <parent>
         <groupId>com.java</groupId>
         <artifactId>Maven-Dependencies</artifactId>
@@ -17,6 +17,10 @@
     <build>
     	<finalName>Spittr</finalName>
     </build>
+    
+    <properties>
+    	<log4j.version>2.8.1</log4j.version>
+    </properties>
     <dependencies>
 
         <dependency>

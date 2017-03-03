@@ -3,13 +3,16 @@ package spittr.config;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import spittr.web.WebConfig;
 
 public class SpitterWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer
 {
-
+	private static final Logger LOGGER = LogManager.getLogger(SpitterWebInitializer.class);
+	
 	@Override
 	protected Class<?>[] getRootConfigClasses()
 	{
@@ -34,7 +37,9 @@ public class SpitterWebInitializer extends AbstractAnnotationConfigDispatcherSer
 	@Override
 	protected void customizeRegistration(Dynamic registration)
 	{
-		registration.setMultipartConfig(new MultipartConfigElement("E:/tmp/spittr/uploads", 2097152, 4194304, 0));
+		 String tempPath = System.getProperty("java.io.tmpdir");
+		 LOGGER.debug("The upload temp path is {}.", tempPath);
+		 registration.setMultipartConfig(new MultipartConfigElement(tempPath, 2097152, 4194304, 0));
 	}
 
 }

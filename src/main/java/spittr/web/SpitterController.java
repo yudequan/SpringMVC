@@ -6,8 +6,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,8 @@ import spittr.data.SpitterRepository;
 @RequestMapping("/spitter")
 public class SpitterController {
 
+	private static final Logger LOGGER = LogManager.getLogger(SpitterController.class);
+	
   private SpitterRepository spitterRepository;
 
   @Autowired
@@ -45,23 +50,29 @@ public class SpitterController {
   @RequestMapping(value="/register", method=POST)
   public String processRegistration(@RequestPart("profilePicture") MultipartFile profilePicture,
       @Valid Spitter spitter, 
-      Errors errors) {
+      Errors errors, HttpServletRequest req) {
     if (errors.hasErrors()) {
       return "registerForm";
     }
     
     spitterRepository.save(spitter);
+    
+    String realPath = req.getServletContext().getRealPath("/");
+    LOGGER.debug("The real path is {}.", realPath);
    
-    File file = new File("E:/data/spittr/" + profilePicture.getOriginalFilename());
+    String uploadPath = realPath + "WEB-INF/uploads/" +profilePicture.getOriginalFilename(); 
+    LOGGER.debug("The upload path is {}.", uploadPath);
+    
+    File file = new File(uploadPath);
     try
 	{
 		profilePicture.transferTo(file);
 	} catch (IllegalStateException e)
 	{
-		e.printStackTrace();
+		LOGGER.debug(e.getCause());
 	} catch (IOException e)
 	{
-		e.printStackTrace();
+		LOGGER.debug(e.getCause());
 	}
     return "redirect:/spitter/" + spitter.getUsername();
   }
